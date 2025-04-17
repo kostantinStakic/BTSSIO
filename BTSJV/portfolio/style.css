@@ -1,0 +1,537 @@
+/* Importation d'une police depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* Application de la police à tout le site */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Définition d'une variable pour la couleur de fond du wrapper */
+:root {
+  --bg-wrapper: #ffffff; /* Modifiez cette couleur selon vos préférences */
+}
+
+/* Réinitialisation des marges et paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Wrapper principal */
+.wrapper {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: var(--bg-wrapper);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Barre de navigation */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 0 20px;
+}
+
+.logo img {
+  width: 40px; /* Ajustez selon la taille souhaitée pour le logo */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+}
+
+/* Bandeau avec image d'arrière-plan */
+.banner {
+  width: 100%;
+  height: 400px;
+  background: url('../images/banner-image.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner2 {
+  width: 100%;
+  height: 400px;
+  background: url('../images/banner-image2.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-text {
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Section principale */
+.content {
+  padding: 40px;
+  text-align: center;
+}
+
+.content h2 {
+  margin-bottom: 20px;
+}
+
+/* Boutons animés */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  width: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Formulaire */
+.form-divers {
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+}
+
+.form-divers form {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.form-divers form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-divers form input,
+.form-divers form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-divers form button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-divers form button:hover {
+  background-color: #555;
+}
+
+/* Tableau stylisé */
+.data-table {
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+}
+
+.data-table table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+.data-table th, 
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.data-table thead {
+  background-color: #333;
+  color: #fff;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.data-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+
+
+footer .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4; /* ou la couleur que vous souhaitez */
+}
+
+.social-icons a {
+  margin-left: 10px;
+}
+
+.social-icons img {
+  width: 50px; /* ajustez la taille selon vos besoins */
+  height: auto;
+}
+
+.news-feed {
+  padding: 40px;
+  background-color: #f7f7f7; /* Couleur de fond modifiable */
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.news-feed h2 {
+  margin-bottom: 20px;
+}
+
+#feed-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.news-item {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.news-item h3 {
+  margin-bottom: 10px;
+}
+
+.news-item a {
+  text-decoration: none;
+  color: #0073e6;
+  transition: color 0.3s;
+}
+
+.news-item a:hover {
+  color: #005bb5;
+}
+
+.news-item p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Mini CV */
+.mini-cv {
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.mini-cv h2 {
+  margin-bottom: 20px;
+}
+
+.mini-cv p {
+  margin-bottom: 30px;
+  color: #555;
+}
+
+/* Conteneur des compétences */
+.skills {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Barre de progression */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: width 1s ease-in-out;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+    /* Image de base */
+    .image-container img {
+        display: block;
+        width: 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+/* Overlay contenant le texte */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Effet au survol */
+.image-container:hover img {
+    transform: scale(1.1);
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Définition des couleurs des compétences */
+.progress:nth-child(1) { background-color: #4caf50; } /* Développement Web */
+.progress:nth-child(2) { background-color: #2196f3; } /* PHP / MySQL */
+.progress:nth-child(3) { background-color: #ff9800; } /* Python */
+.progress:nth-child(4) { background-color: #9c27b0; } /* Réseau */
+.progress:nth-child(5) { background-color: #e91e63; } /* Cybersécurité */
+.progress:nth-child(6) { background-color: #795548; } /* Gestion de projet */
+
+
+/* Style moderne pour les tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-size: 0.95em;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* En-tête du tableau */
+table thead {
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+}
+
+table thead th {
+  padding: 15px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Corps du tableau */
+table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #e0f7fa;
+  transition: background-color 0.3s ease;
+}
+
+table td {
+  padding: 12px 20px;
+  color: #333;
+}
+
+/* Dernière ligne sans bordure */
+table tbody tr:last-of-type {
+  border-bottom: none;
+}
+
+
+/* Styliser le tableau du formulaire */
+form table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Colonnes */
+form td {
+  padding: 12px 10px;
+  font-weight: 500;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Inputs classiques */
+form input[type="text"],
+form input[type="date"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus {
+  border: 1px solid #0073e6;
+  box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+  outline: none;
+}
+
+/* Boutons */
+form input[type="submit"],
+form input[type="reset"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  background-color: #0073e6;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Bouton reset différent */
+form input[type="reset"] {
+  background-color: #e91e63;
+}
+
+/* Hover boutons */
+form input[type="submit"]:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 115, 230, 0.3);
+}
+
+form input[type="reset"]:hover {
+  background-color: #c2185b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Style du sous-menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content li a {
+  display: block;
+  padding: 12px 15px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-content li a:hover {
+  background-color: #555;
+}
+
+/* Affichage au hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
