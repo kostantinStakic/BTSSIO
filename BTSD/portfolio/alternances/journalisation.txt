@@ -1,0 +1,287 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| alternancebtsrd    |
+| bdd                |
+| bddenquete         |
+| bts1dlogin         |
+| bts1jvm            |
+| bts1jvmag          |
+| bts1rd             |
+| btsjvlogin         |
+| btsrd1             |
+| enquete            |
+| enquetec           |
+| gestion_incidents  |
+| glpi               |
+| incident_si        |
+| iris_1             |
+| lid                |
+| login_inject       |
+| loginsql           |
+| mag                |
+| magasin            |
+| music_p            |
+| mysql              |
+| performance_schema |
+| questionnaire      |
+| test               |
++--------------------+
+26 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| alternancebtsrd    |
+| bdd                |
+| bddenquete         |
+| bts1dlogin         |
+| bts1jvm            |
+| bts1jvmag          |
+| bts1rd             |
+| btsjvlogin         |
+| btsrd1             |
+| enquete            |
+| enquetec           |
+| gestion_incidents  |
+| glpi               |
+| incident_si        |
+| iris_1             |
+| lid                |
+| login_inject       |
+| loginsql           |
+| mag                |
+| magasin            |
+| music_p            |
+| mysql              |
+| performance_schema |
+| questionnaire      |
+| test               |
++--------------------+
+26 rows in set (0.00 sec)
+
+mysql> drop database alternancebtsrd;
+Query OK, 4 rows affected (0.03 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| bdd                |
+| bddenquete         |
+| bts1dlogin         |
+| bts1jvm            |
+| bts1jvmag          |
+| bts1rd             |
+| btsjvlogin         |
+| btsrd1             |
+| enquete            |
+| enquetec           |
+| gestion_incidents  |
+| glpi               |
+| incident_si        |
+| iris_1             |
+| lid                |
+| login_inject       |
+| loginsql           |
+| mag                |
+| magasin            |
+| music_p            |
+| mysql              |
+| performance_schema |
+| questionnaire      |
+| test               |
++--------------------+
+25 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| alternancebtsd     |
+| bdd                |
+| bddenquete         |
+| bts1dlogin         |
+| bts1jvm            |
+| bts1jvmag          |
+| bts1rd             |
+| btsjvlogin         |
+| btsrd1             |
+| enquete            |
+| enquetec           |
+| gestion_incidents  |
+| glpi               |
+| incident_si        |
+| iris_1             |
+| lid                |
+| login_inject       |
+| loginsql           |
+| mag                |
+| magasin            |
+| music_p            |
+| mysql              |
+| performance_schema |
+| questionnaire      |
+| test               |
++--------------------+
+26 rows in set (0.00 sec)
+
+mysql> -- commentaire sur une ligne (ATTENTION : mettre des espaces au d‚but)
+mysql> 
+mysql> /* 
+   /*> commentaire 
+   /*> sur 
+   /*> plusieurs lignes
+   /*> */
+mysql> 
+mysql> -- suppression de la bdd si elle existe
+mysql> 
+mysql> drop database if exists alternanceBTSD;
+Query OK, 4 rows affected (0.04 sec)
+
+mysql> 
+mysql> -- cr‚ation de la bdd
+mysql> 
+mysql> create database alternanceBTSD;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> -- acc‚der … la bdd
+mysql> 
+mysql> use alternanceBTSD;
+Database changed
+mysql> 
+mysql> -- creation des tables
+mysql> 
+mysql> CREATE TABLE entreprise(
+    -> id_ent int auto_increment primary key,
+    -> siret int,
+    -> nom_ent varchar(150),
+    -> categorie varchar(150),
+    -> adresse_ent varchar(250),
+    -> cp int(5),
+    -> mail_ent varchar(15),
+    -> telephone int
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> 
+mysql> CREATE TABLE alternance(
+    -> id_alt int auto_increment primary key,
+    -> intitule varchar(150),
+    -> descripition varchar(1000),
+    -> date_deb date,
+    -> date_fin date,
+    -> id_ent int,
+    -> foreign key(id_ent) 
+    -> references entreprise(id_ent)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> 
+mysql> CREATE TABLE etudiant(
+    -> id_etu int auto_increment primary key,
+    -> nom_etu varchar(150),
+    -> prenom_etu varchar(150),
+    -> adresse_etu varchar(250),
+    -> mail_etu varchar(15),
+    -> telephone_etu int
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> 
+mysql> 
+mysql> CREATE TABLE candidature(
+    -> id_ent int,
+    -> id_etu int,
+    -> foreign key(id_ent) references entreprise(id_ent),
+    -> foreign key(id_etu) references etudiant (id_etu),
+    -> primary key(id_ent,id_etu) 
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> use alternancebtsd;
+Database changed
+mysql> select * from etudiant;
+Empty set (0.00 sec)
+
+mysql> select * from etudiant;
+Empty set (0.00 sec)
+
+mysql> desc etudiant;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id_etu        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nom_etu       | varchar(150) | YES  |     | NULL    |                |
+| prenom_etu    | varchar(150) | YES  |     | NULL    |                |
+| adresse_etu   | varchar(250) | YES  |     | NULL    |                |
+| mail_etu      | varchar(15)  | YES  |     | NULL    |                |
+| telephone_etu | int(11)      | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from etudiant;
++--------+---------+------------+-------------+----------+---------------+
+| id_etu | nom_etu | prenom_etu | adresse_etu | mail_etu | telephone_etu |
++--------+---------+------------+-------------+----------+---------------+
+|      1 | deed    | dddde      | NULL        | NULL     |          NULL |
+|      2 | rerre   | rerer      | NULL        | NULL     |          NULL |
++--------+---------+------------+-------------+----------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE etudiant 
+    -> ADD mdp varchar(20) 
+    -> AFTER mail_etu;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from etudiant;
++--------+---------+------------+-------------+----------+------+---------------+
+| id_etu | nom_etu | prenom_etu | adresse_etu | mail_etu | mdp  | telephone_etu |
++--------+---------+------------+-------------+----------+------+---------------+
+|      1 | deed    | dddde      | NULL        | NULL     | NULL |          NULL |
+|      2 | rerre   | rerer      | NULL        | NULL     | NULL |          NULL |
++--------+---------+------------+-------------+----------+------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from etudiant;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from etudiant;
+Empty set (0.00 sec)
+
+mysql> insert into etudiant(nom_etu,prenom_etu,mail_etu,mdp)
+    -> values('Blabla', 'Blibli', 'bla@gmail.fr','123');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from etudiant;
++--------+---------+------------+-------------+--------------+------+---------------+
+| id_etu | nom_etu | prenom_etu | adresse_etu | mail_etu     | mdp  | telephone_etu |
++--------+---------+------------+-------------+--------------+------+---------------+
+|      3 | Blabla  | Blibli     | NULL        | bla@gmail.fr | 123  |          NULL |
++--------+---------+------------+-------------+--------------+------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from etudiant;
++--------+---------+------------+-------------+--------------+------+---------------+
+| id_etu | nom_etu | prenom_etu | adresse_etu | mail_etu     | mdp  | telephone_etu |
++--------+---------+------------+-------------+--------------+------+---------------+
+|      3 | Blabla  | Blibli     | NULL        | bla@gmail.fr | 123  |          NULL |
++--------+---------+------------+-------------+--------------+------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from etudiant where 1=1;
++--------+---------+------------+-------------+--------------+------+---------------+
+| id_etu | nom_etu | prenom_etu | adresse_etu | mail_etu     | mdp  | telephone_etu |
++--------+---------+------------+-------------+--------------+------+---------------+
+|      3 | Blabla  | Blibli     | NULL        | bla@gmail.fr | 123  |          NULL |
++--------+---------+------------+-------------+--------------+------+---------------+
+1 row in set (0.00 sec)
+

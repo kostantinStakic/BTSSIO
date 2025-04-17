@@ -1,0 +1,249 @@
+mysql> \T C:\wamp\www\BTS_Portfolio_BTSRDLM\sql\journalisation.txt
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| alternancebtsrd    |
+| bdd                |
+| bddenquete         |
+| bts1dlogin         |
+| bts1jvm            |
+| bts1jvmag          |
+| bts1rd             |
+| btsjvlogin         |
+| btsrd1             |
+| enquete            |
+| enquetec           |
+| gestion_incidents  |
+| iris_1             |
+| lid                |
+| loginsql           |
+| mag                |
+| magasin            |
+| music_p            |
+| mysql              |
+| performance_schema |
+| questionnaire      |
+| test               |
++--------------------+
+23 rows in set (0.00 sec)
+
+mysql> select * from clients;
++--------+----------+--------------+------------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse          | Cp    | Ville     | Telephone  |
++--------+----------+--------------+------------------+-------+-----------+------------+
+|      1 | Auguy    | Jean         | 1 rue droite     | 30000 | N?®mes    | 0485957575 |
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe     | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch      | 12000 | Rodez     | NULL       |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne  | 66000 | Perpignan | NULL       |
+|      5 | Durand   | Raymond      | Rue des oliviers | 30000 | N?®mes    | 0475145425 |
++--------+----------+--------------+------------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select nom, prenom from clients;
++----------+--------------+
+| nom      | prenom       |
++----------+--------------+
+| Auguy    | Jean         |
+| Baptiste | Jean-Luc     |
+| Baptiste | Amandine     |
+| Collard  | Marie-Claire |
+| Durand   | Raymond      |
++----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT nom AS 'Nom de famille:', prenom AS 'Pr‚nom :'
+    -> FROM clients;
++-----------------+--------------+
+| Nom de famille: | Pr‚nom :     |
++-----------------+--------------+
+| Auguy           | Jean         |
+| Baptiste        | Jean-Luc     |
+| Baptiste        | Amandine     |
+| Collard         | Marie-Claire |
+| Durand          | Raymond      |
++-----------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select nom from clients;
++----------+
+| nom      |
++----------+
+| Auguy    |
+| Baptiste |
+| Baptiste |
+| Collard  |
+| Durand   |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT nom FROM clients;
++----------+
+| nom      |
++----------+
+| Auguy    |
+| Baptiste |
+| Collard  |
+| Durand   |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients WHERE ville = 'Rodez';
++--------+----------+----------+--------------+-------+-------+------------+
+| NumCli | Nom      | Prenom   | Adresse      | Cp    | Ville | Telephone  |
++--------+----------+----------+--------------+-------+-------+------------+
+|      2 | Baptiste | Jean-Luc | 7 rue courbe | 12000 | Rodez | 0565428775 |
+|      3 | Baptiste | Amandine | Avenue Foch  | 12000 | Rodez | NULL       |
++--------+----------+----------+--------------+-------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients WHERE nom LIKE 'B%';
++--------+----------+----------+--------------+-------+-------+------------+
+| NumCli | Nom      | Prenom   | Adresse      | Cp    | Ville | Telephone  |
++--------+----------+----------+--------------+-------+-------+------------+
+|      2 | Baptiste | Jean-Luc | 7 rue courbe | 12000 | Rodez | 0565428775 |
+|      3 | Baptiste | Amandine | Avenue Foch  | 12000 | Rodez | NULL       |
++--------+----------+----------+--------------+-------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from clients;
++--------+----------+--------------+------------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse          | Cp    | Ville     | Telephone  |
++--------+----------+--------------+------------------+-------+-----------+------------+
+|      1 | Auguy    | Jean         | 1 rue droite     | 30000 | N?®mes    | 0485957575 |
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe     | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch      | 12000 | Rodez     | NULL       |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne  | 66000 | Perpignan | NULL       |
+|      5 | Durand   | Raymond      | Rue des oliviers | 30000 | N?®mes    | 0475145425 |
++--------+----------+--------------+------------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients WHERE ville LIKE '%Z' 
+    -> AND nom LIKE 'B%' ;
++--------+----------+----------+--------------+-------+-------+------------+
+| NumCli | Nom      | Prenom   | Adresse      | Cp    | Ville | Telephone  |
++--------+----------+----------+--------------+-------+-------+------------+
+|      2 | Baptiste | Jean-Luc | 7 rue courbe | 12000 | Rodez | 0565428775 |
+|      3 | Baptiste | Amandine | Avenue Foch  | 12000 | Rodez | NULL       |
++--------+----------+----------+--------------+-------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_lid |
++---------------+
+| achats        |
+| articles      |
+| clients       |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from articles;
++--------+-----------------+--------------+-------+
+| NumArt | Designation     | Categorie    | Prix  |
++--------+-----------------+--------------+-------+
+|      1 | Charlie Winston | CD           | 12.00 |
+|      2 | Cam?©ra Caf?©   | DVD          | 19.00 |
+|      3 | WebCam          | Informatique | 24.00 |
+|      4 | Graveur         | Informatique | 38.00 |
+|      5 | Cl?© USB 16G    | Informatique | 18.00 |
++--------+-----------------+--------------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM articles
+    -> WHERE prix > 15;
++--------+---------------+--------------+-------+
+| NumArt | Designation   | Categorie    | Prix  |
++--------+---------------+--------------+-------+
+|      2 | Cam?©ra Caf?© | DVD          | 19.00 |
+|      3 | WebCam        | Informatique | 24.00 |
+|      4 | Graveur       | Informatique | 38.00 |
+|      5 | Cl?© USB 16G  | Informatique | 18.00 |
++--------+---------------+--------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM articles
+    -> WHERE prix >= 14 
+    -> AND prix <= 30 ;
++--------+---------------+--------------+-------+
+| NumArt | Designation   | Categorie    | Prix  |
++--------+---------------+--------------+-------+
+|      2 | Cam?©ra Caf?© | DVD          | 19.00 |
+|      3 | WebCam        | Informatique | 24.00 |
+|      5 | Cl?© USB 16G  | Informatique | 18.00 |
++--------+---------------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> WHERE ville = 'Rodez'
+    -> AND nom = 'Baptiste';
++--------+----------+----------+--------------+-------+-------+------------+
+| NumCli | Nom      | Prenom   | Adresse      | Cp    | Ville | Telephone  |
++--------+----------+----------+--------------+-------+-------+------------+
+|      2 | Baptiste | Jean-Luc | 7 rue courbe | 12000 | Rodez | 0565428775 |
+|      3 | Baptiste | Amandine | Avenue Foch  | 12000 | Rodez | NULL       |
++--------+----------+----------+--------------+-------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> WHERE ville = 'Rodez'
+    -> OR nom = 'Collard';
++--------+----------+--------------+-----------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse         | Cp    | Ville     | Telephone  |
++--------+----------+--------------+-----------------+-------+-----------+------------+
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe    | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch     | 12000 | Rodez     | NULL       |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne | 66000 | Perpignan | NULL       |
++--------+----------+--------------+-----------------+-------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> WHERE ville IN('Tarbes','Aurillac','Rodez');
++--------+----------+----------+--------------+-------+-------+------------+
+| NumCli | Nom      | Prenom   | Adresse      | Cp    | Ville | Telephone  |
++--------+----------+----------+--------------+-------+-------+------------+
+|      2 | Baptiste | Jean-Luc | 7 rue courbe | 12000 | Rodez | 0565428775 |
+|      3 | Baptiste | Amandine | Avenue Foch  | 12000 | Rodez | NULL       |
++--------+----------+----------+--------------+-------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> ORDER BY nom ASC;
++--------+----------+--------------+------------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse          | Cp    | Ville     | Telephone  |
++--------+----------+--------------+------------------+-------+-----------+------------+
+|      1 | Auguy    | Jean         | 1 rue droite     | 30000 | N?®mes    | 0485957575 |
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe     | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch      | 12000 | Rodez     | NULL       |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne  | 66000 | Perpignan | NULL       |
+|      5 | Durand   | Raymond      | Rue des oliviers | 30000 | N?®mes    | 0475145425 |
++--------+----------+--------------+------------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> ORDER BY nom DESC;
++--------+----------+--------------+------------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse          | Cp    | Ville     | Telephone  |
++--------+----------+--------------+------------------+-------+-----------+------------+
+|      5 | Durand   | Raymond      | Rue des oliviers | 30000 | N?®mes    | 0475145425 |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne  | 66000 | Perpignan | NULL       |
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe     | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch      | 12000 | Rodez     | NULL       |
+|      1 | Auguy    | Jean         | 1 rue droite     | 30000 | N?®mes    | 0485957575 |
++--------+----------+--------------+------------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients
+    -> ORDER BY nom;
++--------+----------+--------------+------------------+-------+-----------+------------+
+| NumCli | Nom      | Prenom       | Adresse          | Cp    | Ville     | Telephone  |
++--------+----------+--------------+------------------+-------+-----------+------------+
+|      1 | Auguy    | Jean         | 1 rue droite     | 30000 | N?®mes    | 0485957575 |
+|      2 | Baptiste | Jean-Luc     | 7 rue courbe     | 12000 | Rodez     | 0565428775 |
+|      3 | Baptiste | Amandine     | Avenue Foch      | 12000 | Rodez     | NULL       |
+|      4 | Collard  | Marie-Claire | Rue dâ€™Espagne  | 66000 | Perpignan | NULL       |
+|      5 | Durand   | Raymond      | Rue des oliviers | 30000 | N?®mes    | 0475145425 |
++--------+----------+--------------+------------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
