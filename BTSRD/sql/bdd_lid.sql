@@ -247,3 +247,34 @@ SELECT SUM(qte) AS 'Quantité total'
 FROM achats
 WHERE NumArt = 3;
 
+-- UPDATE
+-- Modifier le prénom de Durand Raymond par Bernard.
+
+UPDATE clients SET prenom = 'Bernard' WHERE nom = 'Durand'
+AND prenom = 'Raymond';
+
+UPDATE clients SET prenom = 'Bernard' WHERE NumCli = 5;
+
+-- 1 
+-- Bernard a oublié de spécifier le numéro de sa rue, 
+-- modifier la pour qu'elle apparaisse de la manière suivante:
+-- 10 rue des oliviers  
+
+-- 2
+-- UPDATE table SET colonne = 'valeur';
+UPDATE clients SET Adresse = '10 rue des Olivers' WHERE 
+id = 5;
+
+-- 3
+-- Augmenter tous les prix de 15% (/,*,+,-)
+UPDATE articles SET prix = prix * 1.15;
+
+-- 4
+-- Augmenter de 15% les articles de la catégorie 'informatique'
+UPDATE articles SET prix = prix * 1.15 
+WHERE categorie = 'informatique';
+
+-- DELETE 
+-- supprimer les clients qui habitent à Rodez
+
+DELETE FROM clients WHERE ville = 'Rodez';
