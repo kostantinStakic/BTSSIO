@@ -8,8 +8,10 @@
 <body>
 
 	<form method="post">
+		Mail : <br>
 		<input type="text" name="mail"><br>
-		<input type="text" name="mdp"><br>
+		Mot de passe : <br>
+		<input type="text" name="mdp"><br><br>
 		<input type="submit" name="valider" value="VALIDER"><br>
 	</form>
 
@@ -30,10 +32,12 @@
 		// on envoie la requête avec QUERY(), la méthode 
 		// vulnérable
 
-		$lesResultats = $conn->query($requete);
+		$conn->query($requete);
+
+		$lesResultats = $conn->get_result();
 
 		foreach ($lesResultats as $unResultat) {
-			echo "Connexion à la session de : " . $unResultat["mail"];
+			echo "Connexion à la session de : " . $unResultat['mail'];
 		}
 	}
 
