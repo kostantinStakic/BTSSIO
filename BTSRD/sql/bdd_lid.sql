@@ -278,3 +278,5 @@ WHERE categorie = 'informatique';
 -- supprimer les clients qui habitent à Rodez
 
 DELETE FROM clients WHERE ville = 'Rodez';
+
+
