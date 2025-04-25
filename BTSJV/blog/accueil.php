@@ -34,7 +34,7 @@ include("fonctions.php");
 		//on va afficher le résultat
 		foreach ($resultat as $auteur) {
 			$id = $auteur["id_aut"];
-			$_SESSION['utilisateur'] = $resultat;
+			$_SESSION['utilisateur'] = $auteur;
 			header("Location: connexion.php?id=".$id);
 		}
 
