@@ -105,14 +105,108 @@ SELECT a.libelle, st.tarif
 FROM activite a, station st
 WHERE st.nomStation = a.nomStation;
 
--- 5. Afficher les séjours en Europe avec noms des clients.  
 
--- 6. Stations proposant des activités supérieures à 100€.  
 
--- 7. Clients ayant réservé un séjour aux Antilles.  
 
--- 8. Stations ayant au moins une activité.  
+REQUETES A faire pour vendredi prochain
+### **Module 1 : Introduction**
 
--- 9. Clients et nombre de séjours réservés.  
+-- 1. Afficher toutes les stations.
 
--- 10. Séjours avec détails complets (client, station, activité). 
+SELECT * FROM station;  
+
+-- 2. Afficher tous les clients.  
+
+SELECT * FROM clients;
+
+-- 3. Afficher toutes les activités.  
+
+SELECT * FROM activites;
+
+-- 4. Afficher tous les séjours. 
+
+SELECT * FROM sejours; 
+
+-- 5. Afficher les stations en Europe.  
+
+SELECT nomStation AS 'Nom de la station',region 
+FROM station 
+WHERE region='europe';
+
+-- 6. Afficher les clients avec solde positif. 
+
+select nom,prenom,solde from client where solde > 0; 
+
+-- 7. Afficher les activités coûtant moins de 50.  
+
+select libelle,prix from activite where prix <= 50;
+
+-- 7bis. Modifier l'activite mal orthographiée 'kayac' en 'kayak'
+
+update activite set libelle='Kayak' where libelle='Kayac';
+
+-- 8. Afficher le nombre de stations.  
+
+select count(nomStation) from station;
+
+-- 8-1 affichage sans doublon
+
+select count(distinct libelle) as "Nombre d'activités" from activite;
+
+-- 8-2 Le total de capacité de toutes les stations
+
+select sum(capacite) from station;
+
+-- 8-3 La station la plus chere 
+
+select max(prix) from station;
+
+-- 8-4 La station la moins chere
+
+select min(prix) from station;
+
+-- 8-5 le total de tous les tarifs des stations, la moins chere et la plus chere
+-- avec des alias
+
+select sum(tarif) as 'total', min(tarif) as 'prix le + bas', max(tarif) as 'prix le + haut'
+from station; 
+
+-- 8-6 la moyenne des tarifs arrondi au superieur avec 2 chiffres après la virgule
+
+select avg(tarif) from station;
+
+select round(avg(tarif),2) as 'total' from station;
+
+-- 9. Afficher les clients habitant à Paris.  
+
+select nom, prenom from client where ville='paris';
+
+-- 10. Afficher les séjours qui commence en juillet 2023.  
+
+select station from sejour 
+where debut >= '2023-07-01' and debut <= '2023-07-31';
+
+select station from sejour
+where debut BETWEEN '2023-07-01' And '2023-07-31';
+ 
+### **Module 5 : Jointures (méthode classique)**
+
+1. Afficher clients et séjours associés.  
+
+2. Afficher stations et activités proposées.  
+
+3. Afficher les clients, leurs séjours et les stations concernées.  
+
+4. Afficher activités et tarifs des stations associées.  
+
+5. Afficher les séjours en Europe avec noms des clients.  
+
+6. Stations proposant des activités supérieures à 100€.  
+
+7. Clients ayant réservé un séjour aux Antilles.  
+
+8. Stations ayant au moins une activité.  
+
+9. Clients et nombre de séjours réservés.  
+
+10. Séjours avec détails complets (client, station, activité).  
