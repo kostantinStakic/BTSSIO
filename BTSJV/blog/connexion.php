@@ -2,6 +2,7 @@
 session_start();
 include("fonctions.php");
 if ($_SESSION['utilisateur'] != null) {
+
 	if ($_GET['id'] != $_SESSION['utilisateur']['id_aut']) {
 		die("Connexion refusée!");
 	}
@@ -15,6 +16,7 @@ $resultat = $mysqli->query($requete);
 foreach ($resultat as $auteur) {
 	echo "Connexion réussie pour : " . $auteur["nom_aut"] . " " . $auteur["prenom_aut"];
 }
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 	$_SESSION = [];
 	session_destroy();

@@ -39,6 +39,7 @@ include("fonctions.php");
 		}
 
 	}
+
 	?>
 
 	<h1>Blog BTS, mais pas trop ...</h1>
