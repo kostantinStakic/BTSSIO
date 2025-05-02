@@ -17,7 +17,7 @@ foreach ($resultat as $auteur) {
 	echo "Connexion réussie pour : " . $auteur["nom_aut"] . " " . $auteur["prenom_aut"];
 }
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
+if (($_SERVER['REQUEST_METHOD'] === "POST") && isset($_POST['deconnexion'])) {
 	$_SESSION = [];
 	session_destroy();
 	header("Location: accueil.php");
@@ -38,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </head>
 <body>
 	<form method="POST">
-		<button>Déconnexion</button>
+		<button name="deconnexion">Déconnexion</button>
 	</form>
+
+	//formulaire d'upload des articles avec image
 
 	<form method="POST" enctype="multipart/form-data">
 		<input type="text" name="titre" placeholder="TITRE"><br><br>
@@ -48,7 +50,40 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 		<input type="submit" name="upload" value="upload">
 	</form>
 
-	
+<?php
+
+if (isset($_POST['upload'])) {
+	//chemin de destination des images chargées
+	$dossier = "images/";
+
+	/*
+	on verifie que le dossier existe bien, 
+	si ce n'est pas le cas on créé le dossier grace à la fonction mkdir()
+	*/
+	if (!is_dir($dossier)) {
+		mkdir($dossier);
+	}
+
+	//on récupère grace à un tableau la clé(nom de l'attibut image dans le form) ainsi que son nom (name)
+
+	$image = $_FILES['image']['name'];
+
+	//on créé une variable qui contient le chemin de l'image 
+
+	$destination = $dossier . $image;
+
+	//on déplace l'image côté server vers la destination choisie
+
+	move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+
+	?>
+
+	<img src="<?php echo $destination; ?>">
+
+	<?php
+}
+
+?>
 	
 </body>
 </html>
