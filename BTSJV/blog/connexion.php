@@ -40,6 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 	<form method="POST">
 		<button>Déconnexion</button>
 	</form>
+
+	<form method="POST" enctype="multipart/form-data">
+		<input type="text" name="titre" placeholder="TITRE"><br><br>
+		<textarea name="contenu" cols="50" rows="10"></textarea><br><br>
+		<input type="file" name="image">
+		<input type="submit" name="upload" value="upload">
+	</form>
+
+	
 	
 </body>
 </html>
