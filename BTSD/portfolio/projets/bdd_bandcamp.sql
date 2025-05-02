@@ -243,6 +243,110 @@ SELECT titre_chan, artiste_chan, prix_chan
 FROM chanson
 WHERE prix_chan BETWEEN 5 AND 10;
 
+-- Sauvegarde et restauration
+
+-- EXPORTER une bdd
+
+-- exemple : mysqldump -u root -p <options> <nomdelaBDD> > bddSave.sql 
+
+mysqldump -u root -p --add-drop-database --databases lid > lid.sql
+
+-- RESTAURER la bdd
+
+mysql -u root -p < lid.sql
+
+-- LES JOINTURES
+
+-- afficher le nom, prénom de tous les clients qui ont commandé 
+-- un article le 30 janvier 2024
+
+SELECT nom, prenom 
+FROM clients, achats
+WHERE clients.numcli = achats.numcli
+AND date='2024-01-30';
 
 
+-- pour afficher une seule fois chaque clients on utilise DISTINCT
 
+SELECT DISTINCT nom, prenom 
+FROM clients, achats
+WHERE clients.numcli = achats.numcli
+AND date='2024-01-30';
+
+/*
+ - Afficher le nom et le prénom des clients ainsi 
+ que la quantité et la désignation des produits achetés :
+
+*/
+
+SELECT c.nom, c.prenom, ac.qte, ar.designation
+FROM clients c, achats ac, articles ar
+WHERE c.numcli = ac.numcli
+AND ar.numart = ac.numart;
+
+-- FONCTIONS :
+
+-- calculer et afficher le prix moyen d'un article
+SELECT AVG(prix) AS 'Prix moyen'
+FROM articles;
+
+-- on utilisera round(valeur,Nbede chiffre) ROUND(x,2)
+-- pour n'afficher que 2 chiffres après la virgule
+SELECT ROUND(AVG(prix),2) AS 'Prix moyen'
+FROM articles;
+
+
+-- le prix moyen, le min et le max
+SELECT ROUND(AVG(prix),2), MIN(prix), MAX(prix)
+FROM articles;
+
+SELECT * FROM articles
+ORDER BY prix
+LIMIT 1;
+
+-- ou
+
+SELECT * FROM articles
+ORDER BY prix ASC;
+
+-- ordre décroissant
+
+SELECT * FROM articles
+ORDER BY prix DESC;
+
+
+-- la somme de toutes les quantités achetées
+SELECT SUM(qte)
+FROM articles;
+
+
+-- le nombre de catégorie
+SELECT COUNT(categorie)
+FROM articles;
+
+-- cette requête affichera toutes leslignes correspondantes
+-- ce qui ne nous arrange pas, puisqu'il n'y a que 3 catégories
+-- on utilisera DISTINCT 
+
+SELECT COUNT(DISTINCT categorie)
+FROM articles;
+
+
+-- UPDATE 
+-- changer l'adresse mal insérée 'rue d?espagne' en "rue d'Espagne"
+UPDATE clients SET adresse = "Rue d'Espagne" WHERE numcli=4;
+
+-- mettre vide les telephones qui sont NULL
+
+UPDATE clients SET telephone="" WHERE telephone IS NULL; 
+-- Amandine ayant divorcée a recupéré à défaut de son argent, son nom de 
+-- naissance. Ainsi qu'un nouveau téléphone de marque inconnu
+
+UPDATE clients SET nom="Sharknado", telephone="0671344500"
+WHERE numcli=3;
+
+-- DELETE 
+
+-- Jean-Luc, fou de chagrin, décide de clôturer son compte 
+
+DELETE FROM clients WHERE numcli=2;
