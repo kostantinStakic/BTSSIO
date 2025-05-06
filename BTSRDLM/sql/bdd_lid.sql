@@ -249,3 +249,54 @@ mysqldump -u root -p --add-drop-database --databases <nomdelaBDD> > save.mysql
 
 mysql -u root -p < save.sql 
 
+-- SOUS REQUETES
+
+-- Lister les achats (numart, date, qte) du client Durand 
+
+-- version avec jointure
+select numart,date,qte
+from achats a, clients c
+where a.numcli = c.numcli
+and c.nom = 'Durand';
+
+-- version avec sous requete
+select numart,date,qte
+from achats a
+where a.numcli = (select numcli 
+                    from clients
+                    where nom = 'Durand');
+
+
+/*
+On veut les articles dont le prix est supérieur
+à la moyenne de tous les prix des articles
+*/
+SELECT * FROM Articles
+WHERE Prix > (SELECT AVG(Prix) FROM Articles);
+
+/*
+Afficher le nom et prénom des clients habitants la même ville 
+que le client 5 et ayant achetés des articles dont le prix est
+supérieur à 15 euros
+*/
+select nom, prenom
+from clients, achats
+where clients.ville = (select ville 
+                        from clients 
+                        where numcli=5)
+and clients.numcli = achats.numcli
+and achats.numart in (select numart 
+                        from articles 
+                        where prix > 15);
+
+/*
+Afficher les articles dont le prix de vente est supérieur
+au prix de vente de tous articles de la catégorie CD
+*/
+
+select * 
+from articles 
+where prix > (select sum(prix)
+                from articles 
+                where categorie='cd');
+

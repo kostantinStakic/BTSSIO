@@ -1,4 +1,5 @@
 -- Module 1 : Introduction
+
 -- 1. Afficher toutes les stations.
 SELECT * FROM Station;
 
@@ -27,11 +28,20 @@ SELECT COUNT(*) FROM Station;
 SELECT * FROM Client WHERE ville = 'Paris';
 
 -- 10. Afficher les séjours commençant en juillet 2023.
-SELECT * FROM Sejour WHERE debut BETWEEN '2023-07-01' AND '2023-07-31';
+SELECT * FROM Sejour 
+WHERE debut 
+BETWEEN '2023-07-01' AND '2023-07-31';
 
+-- ou version < et >
+SELECT * FROM Sejour 
+WHERE 
+debut >= '2023-07-01' AND
+debut <= '2023-07-31';
 
 -- Module 2 : Tri et filtrage
 -- 1. Stations triées par tarif croissant.
+SELECT * FROM Station ORDER BY tarif;
+-- ou
 SELECT * FROM Station ORDER BY tarif ASC;
 
 -- 2. Clients triés par solde décroissant.
@@ -70,7 +80,8 @@ SELECT * FROM Client WHERE solde BETWEEN 1000 AND 5000;
 SELECT * FROM Station WHERE region != 'Antilles';
 
 -- 3. Activités avec un prix supérieur à la moyenne.
-SELECT * FROM Activite WHERE prix > (SELECT AVG(prix) FROM Activite);
+SELECT * FROM Activite 
+WHERE prix > (SELECT AVG(prix) FROM Activite);
 
 -- 4. Séjours en 2024.
 SELECT * FROM Sejour WHERE YEAR(debut) = 2024;
