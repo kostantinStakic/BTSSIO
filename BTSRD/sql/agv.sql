@@ -76,4 +76,83 @@ VALUES(10,'Passac','2023-07-01', 2),
         (30,'Farniente','2024-06-24',5),
         (10,'Farniente','2023-09-05',3);
 
-        
+-- CORRECTION
+
+-- Module 1 : Introduction
+-- 1. Afficher toutes les stations.
+SELECT * FROM Station;
+ 
+-- 2. Afficher tous les clients.
+SELECT * FROM Client;
+ 
+-- 3. Afficher toutes les activités.
+SELECT * FROM Activite;
+ 
+-- 4. Afficher tous les séjours.
+SELECT * FROM Sejour;
+ 
+-- 5. Afficher les stations en Europe.
+SELECT * FROM Station WHERE region = 'Europe';
+ 
+-- 6. Afficher les clients avec solde positif.
+SELECT * FROM Client WHERE solde > 0;
+ 
+-- 7. Afficher les activités coûtant moins de 50.
+SELECT * FROM Activite WHERE prix < 50;
+ 
+-- 8. Afficher le nombre de stations.
+SELECT COUNT(*) FROM Station;
+ 
+-- 9. Afficher les clients habitant à Paris.
+SELECT * FROM Client WHERE ville = 'Paris';
+ 
+-- 10. Afficher les séjours commençant en juillet 2023.
+SELECT * FROM Sejour 
+WHERE debut 
+BETWEEN '2023-07-01' AND '2023-07-31';
+-- OU
+SELECT * FROM Sejour 
+WHERE debut >= '2023-07-01' 
+AND debut <= '2023-07-31';
+
+-- Module 2 : Tri et filtrage
+
+-- 1. Stations triées par tarif croissant.
+SELECT * FROM Station ORDER BY tarif ASC;
+--ou
+SELECT * FROM Station ORDER BY tarif;
+ 
+-- 2. Clients triés par solde décroissant.
+SELECT * FROM Client ORDER BY solde DESC;
+ 
+-- 3. Activités triées par prix décroissant.
+SELECT * FROM Activite ORDER BY prix DESC;
+ 
+-- 4. Séjours triés par date de début croissante.
+SELECT * FROM Sejour ORDER BY debut ASC;
+ 
+-- 5. Clients triés par nom.
+SELECT * FROM Client ORDER BY nom;
+ 
+-- 6. Stations ayant plus de 100 places.
+SELECT * FROM Station WHERE capacite > 100;
+ 
+-- 7. Activités disponibles à 'Passac'.
+SELECT * FROM Activite WHERE nomStation = 'Passac';
+ 
+-- 8. Clients en dehors d'Europe.
+SELECT * FROM Client WHERE region != 'Europe';
+
+-- 8bis. Clients en Europe.
+
+SELECT * FROM Client WHERE region = 'Europe';
+ 
+-- 9. Séjours ayant plus de 2 places réservées.
+SELECT * FROM Sejour WHERE nbPlaces > 2;
+ 
+-- 10. Stations dont le nom commence par 'S'.
+SELECT * FROM Station WHERE nomStation LIKE 'S%';
+
+
+
+

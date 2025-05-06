@@ -280,3 +280,36 @@ WHERE categorie = 'informatique';
 DELETE FROM clients WHERE ville = 'Rodez';
 
 
+-- SOUS REQUETES
+-- Lister les achats(numart,date,qte) de Auguy
+
+-- version avec jointure
+select numart, date, qte
+from achats, clients
+where achats.NumCli = clients.NumCli
+and nom = 'auguy';
+
+-- version avec jointure et alias
+select a.numart, a.date, a.qte
+from achats a, clients c
+where a.NumCli = c.NumCli
+and nom = 'auguy';
+
+-- version avec sous-requête
+select numcli from clients where nom = 'auguy';
+
+select * 
+from achats 
+where numcli=(
+    select numcli 
+    from clients 
+    where nom = 'auguy');
+
+-- connaître les articles de prix supérieur au prix moyen 
+-- de tous les articles
+
+select * 
+from articles
+where prix >
+(select avg(prix)
+from articles);
