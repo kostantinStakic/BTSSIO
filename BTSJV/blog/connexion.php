@@ -9,9 +9,7 @@ if ($_SESSION['utilisateur'] != null) {
 
 $id = $_GET['id'];
 
-$requete = "select * from auteur where id_aut=$id";
 
-$resultat = $mysqli->query($requete);
 
 foreach ($resultat as $auteur) {
 	echo "Connexion réussie pour : " . $auteur["nom_aut"] . " " . $auteur["prenom_aut"];
