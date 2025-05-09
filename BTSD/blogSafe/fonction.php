@@ -17,14 +17,22 @@ function connexionUser($connect,$mail,$mdp)
 	}
 
 	//création de la requete
-	$requete = "select * from auteur where mail='$mail' and mdp='$mdp'";
+	$requete = "select * from auteur where mail=? and mdp=?";
 
-	//Execution de la requête avec query()
-	//et récupération du résultat 
-	//!!! méthode vulnérable !!!
-	$resultat = $connect->query($requete);
+	//preparation de la requete
+	$stmt = $connect->prepare($requete);
+
+	//assocation du type des variables
+	$stmt->bind_param("ss",$mail,$mdp);
+
+	//executer la requete
+	$stmt->execute();
+
+	//recuperer le ou les resultats
+	$resultat = $stmt->get_result();
 
 	return $resultat;
+
 }
 
 function selectWhereIdAut($connect,$idaut)

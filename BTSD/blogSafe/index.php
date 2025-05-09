@@ -1,10 +1,19 @@
 <?php
+session_start();
 include("fonction.php");
 $connect = new mysqli($hostname,$user,$password,$dbname);
 
 if (isset($_GET['valider'])) {
-	$mail = $_GET['mail'];
-	$mdp = $_GET['mdp'];
+	//transformer les balises html en texte
+	//pour éviter les injection type XSS
+	//Cross-site Scripting
+	//exemple: redirection vers site malveillant
+	//via code JS grace à la balise <script>
+
+	//trim pour rogner les espaces en debut 
+	//et fin de saisie
+	$mail = htmlspecialchars(trim($_GET['mail']));
+	$mdp = htmlspecialchars(trim($_GET['mdp']));
 
 	//appel de la fonction de verif à la connexion
 	$resultat = connexionUser($connect,$mail,$mdp);
