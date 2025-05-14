@@ -1,7 +1,7 @@
 -- BLOG -- 
 
 /*
-bdd : 
+bdd :
 un auteur(pseudo,mdp) peut publier un ou plusieur articles 
 un article(titre,contenu,urlimage) ne peut être publié que par un auteur
 
