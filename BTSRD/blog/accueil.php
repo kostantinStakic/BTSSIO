@@ -10,7 +10,7 @@
     // Connexion a la base de données avec mysqli()
     $hostname = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $dbname = "blog";
     $conn = new mysqli($hostname, $username, $password, $dbname);
     // Vérification de la connexion
