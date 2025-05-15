@@ -12,24 +12,24 @@ CREATE TABLE Clients (
     Cp VARCHAR(10),
     Ville VARCHAR(50),
     Telephone VARCHAR(20)
-);
+)engine=innodb;
 
 CREATE TABLE Articles (
     NumArt INT PRIMARY KEY,
     Designation VARCHAR(100),
     Categorie VARCHAR(50),
     Prix DECIMAL(10,2)
-);
+)engine=innodb;
 
 CREATE TABLE Achats (
     NumCli INT,
     NumArt INT,
-    Date DATE,
+    Dateachat DATE,
     Qte INT,
-    PRIMARY KEY (NumCli, NumArt, Date),
+    PRIMARY KEY (NumCli, NumArt),
     FOREIGN KEY (NumCli) REFERENCES Clients(NumCli),
     FOREIGN KEY (NumArt) REFERENCES Articles(NumArt)
-);
+)engine=innodb;
 
 
 INSERT INTO Clients (NumCli, Nom, Prenom, Adresse, Cp, Ville, Telephone) VALUES
