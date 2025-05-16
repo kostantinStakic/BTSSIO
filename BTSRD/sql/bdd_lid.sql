@@ -12,24 +12,24 @@ CREATE TABLE Clients (
     Cp VARCHAR(10),
     Ville VARCHAR(50),
     Telephone VARCHAR(20)
-);
+)engine=innodb;
 
 CREATE TABLE Articles (
     NumArt INT PRIMARY KEY,
     Designation VARCHAR(100),
     Categorie VARCHAR(50),
     Prix DECIMAL(10,2)
-);
+)engine=innodb;
 
 CREATE TABLE Achats (
     NumCli INT,
     NumArt INT,
-    Date_achat DATE,
+    Dateachat DATE,
     Qte INT,
     PRIMARY KEY (NumCli, NumArt),
     FOREIGN KEY (NumCli) REFERENCES Clients(NumCli),
     FOREIGN KEY (NumArt) REFERENCES Articles(NumArt)
-);
+)engine=innodb;
 
 
 INSERT INTO Clients (NumCli, Nom, Prenom, Adresse, Cp, Ville, Telephone) VALUES
@@ -46,7 +46,7 @@ INSERT INTO Articles (NumArt, Designation, Categorie, Prix) VALUES
 (4, 'Graveur', 'Informatique', 38),
 (5, 'Clé USB 16G', 'Informatique', 18);
 
-INSERT INTO Achats (NumCli, NumArt, Date_achat, Qte) VALUES
+INSERT INTO Achats (NumCli, NumArt, Dateachat, Qte) VALUES
 (1, 1, '2024-01-30', 1),
 (1, 5, '2024-01-30', 4),
 (4, 3, '2024-01-29', 1),
@@ -313,3 +313,65 @@ from articles
 where prix >
 (select avg(prix)
 from articles);
+
+-- Changer l'attribut date en dateAchat
+
+ALTER TABLE achats
+CHANGE Date
+dateAchat date;
+
+-- Afficher les étapes de création 
+-- d'une table ainsi que les contraintes
+-- referentielles 
+
+SHOW CREATE TABLE <nomdelatable>;
+ou
+SHOW CREATE TABLE <nomdelatable>\G
+-- pour affichage vertical (plus clair)
+
+-- supprimer la date en tant que clé primaire
+-- de la table achats
+
+ALTER TABLE achats DROP PRIMARY KEY, 
+ADD PRIMARY KEY(NumCli,NumArt);
+
+-- ajouter contraintes sur clés étrangères
+
+-- supprimer un index
+
+ALTER TABLE achats
+DROP INDEX numart;
+
+-- supprimer les clés étrangères pour
+-- les renommer et créer les contraintes
+
+ALTER TABLE achats
+DROP FOREIGN KEY achats_ibfk_1, 
+DROP FOREIGN KEY achats_ibfk_2;
+
+-- suppression de l'index créé automatiquement
+ALTER TABLE achats
+DROP INDEX numart;
+
+-- pour afficher le moteur de SGBD 
+
+show table status like '<nomDeLaTable>'\G
+
+-- ajout des clés étrangères avec 
+-- les contraintes réferentielles
+
+ALTER TABLE achats 
+ADD CONSTRAINT fkArticle 
+FOREIGN KEY(numart)
+REFERENCES articles(numart),
+ADD CONSTRAINT fkClient 
+FOREIGN KEY(numcli)
+REFERENCES clients(numcli);
+
+-- on ajoute un index sur la clé clients
+
+CREATE INDEX fkClient ON achats(NumCli);
+
+-- renommer les index, appliquer les suppressions
+-- et modifications sur 
+-- les contraintes de participations

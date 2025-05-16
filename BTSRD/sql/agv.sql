@@ -154,5 +154,79 @@ SELECT * FROM Sejour WHERE nbPlaces > 2;
 SELECT * FROM Station WHERE nomStation LIKE 'S%';
 
 
+-- Module 5 : Jointures implicites (méthode classique)
+-- 1. Afficher clients et séjours associés.
+SELECT c.nom, c.prenom, s.debut, s.fin 
+FROM Client c, Sejour s WHERE c.idClient = s.idClient;
+
+-- 2. Afficher stations et activités proposées.
+SELECT st.nomStation, a.libelle 
+FROM Station st, Activite a 
+WHERE st.nomStation = a.nomStation;
+
+-- 3. Afficher les clients, leurs séjours et les stations concernées.
+SELECT c.nom, s.debut, st.nomStation 
+FROM Client c, Sejour s, Station st 
+WHERE c.idClient = s.idClient 
+AND s.nomStation = st.nomStation;
+
+-- 4. Afficher activités et tarifs des stations associées.
+SELECT a.libelle, st.tarif FROM Activite a, Station st WHERE a.nomStation = st.nomStation;
+
+-- 5. Afficher les séjours en Europe avec noms des clients.
+SELECT c.nom, s.debut FROM Client c, Sejour s, Station st WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation AND st.region = 'Europe';
+
+-- 6. Stations proposant des activités supérieures à 100€.
+SELECT DISTINCT st.nomStation FROM Station st, Activite a WHERE st.nomStation = a.nomStation AND a.prix > 100;
+
+-- 7. Clients ayant réservé un séjour aux Antilles.
+SELECT DISTINCT c.nom FROM Client c, Sejour s, Station st WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation AND st.region = 'Antilles';
+
+-- 8. Stations ayant au moins une activité.
+SELECT DISTINCT st.nomStation FROM Station st, Activite a WHERE st.nomStation = a.nomStation;
+
+-- 9. Clients et nombre de séjours réservés.
+SELECT c.nom, COUNT(*) FROM Client c, Sejour s WHERE c.idClient = s.idClient GROUP BY c.nom;
+
+-- 10. Séjours avec détails complets (client, station, activité).
+SELECT c.nom, st.nomStation, a.libelle FROM Client c, Sejour s, Station st, Activite a WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation AND st.nomStation = a.nomStation;
 
 
+-- Module 6 : Sous-requêtes et opérations avancées
+-- 1. Clients ayant réservé dans 
+la station la plus chère.
+
+SELECT nom FROM Client WHERE idClient 
+IN (SELECT idClient FROM Sejour WHERE nomStation = (SELECT nomStation FROM Station ORDER BY tarif DESC LIMIT 1));
+
+-- 2. Stations sans activité.
+SELECT nomStation FROM Station WHERE nomStation 
+NOT IN (SELECT DISTINCT nomStation FROM Activite);
+
+-- 3. Clients ayant le solde le plus élevé.
+SELECT * FROM Client WHERE solde = (SELECT MAX(solde) FROM Client);
+
+-- 4. Stations ayant une capacité supérieure à la moyenne.
+SELECT * FROM Station WHERE capacite > (SELECT AVG(capacite) FROM Station);
+
+-- 5. Activités proposées par la station ayant la plus grande capacité.
+SELECT * FROM Activite WHERE nomStation = 
+(SELECT nomStation FROM Station ORDER BY capacite DESC LIMIT 1);
+
+-- 6. Clients sans séjour réservé.
+SELECT * FROM Client WHERE idClient NOT IN (SELECT DISTINCT idClient FROM Sejour);
+
+-- 7. Séjours avec un nombre de places 
+inférieur à la moyenne.
+
+SELECT * FROM Sejour 
+WHERE nbPlaces < (SELECT AVG(nbPlaces) FROM Sejour);
+
+-- 8. Stations en Europe proposant des activités à moins de 50€.
+SELECT nomStation FROM Activite WHERE prix < 50 AND nomStation IN (SELECT nomStation FROM Station WHERE region = 'Europe');
+
+-- 9. Client ayant réservé le séjour avec le plus grand nombre de places.
+SELECT nom FROM Client WHERE idClient = (SELECT idClient FROM Sejour ORDER BY nbPlaces DESC LIMIT 1);
+
+-- 10. Activités les plus coûteuses.
+SELECT * FROM Activite WHERE prix = (SELECT MAX(prix) FROM Activite);
