@@ -189,24 +189,85 @@ where debut >= '2023-07-01' and debut <= '2023-07-31';
 select station from sejour
 where debut BETWEEN '2023-07-01' And '2023-07-31';
  
-### **Module 5 : Jointures (méthode classique)**
+-- Module 4 : Agrégation et regroupement
+-- 1. Nombre total de clients.
+SELECT COUNT(*) FROM Client;
 
-1. Afficher clients et séjours associés.  
+-- 2. Nombre d'activités par station.
+SELECT nomStation, COUNT(*) FROM Activite GROUP BY nomStation;
 
-2. Afficher stations et activités proposées.  
+-- 3. Moyenne des tarifs des stations.
+SELECT AVG(tarif) FROM Station;
 
-3. Afficher les clients, leurs séjours et les stations concernées.  
+-- 4. Somme totale des soldes des clients.
+SELECT SUM(solde) FROM Client;
 
-4. Afficher activités et tarifs des stations associées.  
+-- 5. Prix maximum des activités.
+SELECT MAX(prix) FROM Activite;
 
-5. Afficher les séjours en Europe avec noms des clients.  
+-- alternative
 
-6. Stations proposant des activités supérieures à 100€.  
+SELECT prix as 'Prix maximum' FROM Activite 
+ORDER BY prix DESC LIMIT 1;
 
-7. Clients ayant réservé un séjour aux Antilles.  
+-- 6. Durée moyenne des séjours en nombre de places.
+SELECT AVG(nbPlaces) FROM Sejour;
 
-8. Stations ayant au moins une activité.  
+-- 7. Nombre de stations par région.
+SELECT region, COUNT(*) FROM Station GROUP BY region;
 
-9. Clients et nombre de séjours réservés.  
+-- 8. Minimum des tarifs des stations.
+SELECT MIN(tarif) FROM Station;
 
-10. Séjours avec détails complets (client, station, activité).  
+-- alternative 
+
+SELECT tarif AS 'Tarif minimum' FROM station
+ORDER BY tarif LIMIT 1;
+
+-- 9. Nombre de clients par ville.
+SELECT ville, COUNT(*) FROM Client GROUP BY ville;
+
+-- 10. Nombre total de places réservées tous séjours confondus.
+SELECT SUM(nbPlaces) FROM Sejour;
+
+-- Module 5 : Jointures implicites (méthode classique)
+-- 1. Afficher clients et séjours associés.
+SELECT c.nom, c.prenom, s.debut, s.fin 
+FROM Client c, Sejour s 
+WHERE c.idClient = s.idClient;
+
+-- 2. Afficher stations et activités proposées.
+SELECT st.nomStation, a.libelle FROM Station st, Activite a WHERE st.nomStation = a.nomStation;
+
+-- 3. Afficher les clients, leurs séjours et les stations concernées.
+SELECT c.nom, s.debut, st.nomStation FROM Client c, Sejour s, Station st WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation;
+
+-- 4. Afficher activités et tarifs des stations associées.
+SELECT a.libelle, st.tarif FROM Activite a, Station st WHERE a.nomStation = st.nomStation;
+
+-- 5. Afficher les séjours en Europe avec noms des clients.
+SELECT c.nom, s.debut FROM Client c, Sejour s, Station st WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation AND st.region = 'Europe';
+
+-- 6. Stations proposant des activités supérieures à 100€.
+SELECT DISTINCT st.nomStation FROM Station st, Activite a WHERE st.nomStation = a.nomStation AND a.prix > 100;
+
+-- 7. Clients ayant réservé un séjour aux Antilles.
+SELECT DISTINCT c.nom FROM Client c, Sejour s, Station st WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation AND st.region = 'Antilles';
+
+-- 8. Stations ayant au moins une activité.
+SELECT DISTINCT st.nomStation FROM Station st, Activite a WHERE st.nomStation = a.nomStation;
+
+-- 9. Clients et nombre de séjours réservés.
+SELECT c.nom, COUNT(*) as 'Nombre total de séjour' 
+FROM Client c, Sejour s 
+WHERE c.id = s.idClient GROUP BY c.nom;
+
+-- 10. Séjours avec détails complets (client, station, activité).
+SELECT c.nom, st.nomStation, a.libelle 
+FROM Client c, Sejour s, Station st, Activite a 
+WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation 
+AND st.nomStation = a.nomStation;
+
+-- on va changer id de la table client en idclient pour
+-- plus de cohésion 
+
