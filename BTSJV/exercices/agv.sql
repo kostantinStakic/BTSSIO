@@ -268,6 +268,21 @@ FROM Client c, Sejour s, Station st, Activite a
 WHERE c.idClient = s.idClient AND s.nomStation = st.nomStation 
 AND st.nomStation = a.nomStation;
 
--- on va changer id de la table client en idclient pour
--- plus de cohésion 
+-- REQUETE IMBRIQUEE
+-- dans LID
+
+-- lister les achats du client auguy
+
+SELECT *
+FROM clients c, articles art, achats ach
+WHERE c.numcli = ach.numcli
+AND art.numart = ach.numart;
+
+SELECT numcli FROM clients WHERE Nom = "Auguy";
+
+SELECT * FROM achats WHERE numcli = 
+(SELECT numcli FROM clients WHERE Nom = "Auguy");
+)
+
+IN 
 
