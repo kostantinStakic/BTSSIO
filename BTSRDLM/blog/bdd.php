@@ -4,6 +4,6 @@
 $hostname = "localhost";
 $user = "root";
 $password = "";
-$dbname = "blog";
+$dbname = "blogLM";
 
 ?>
