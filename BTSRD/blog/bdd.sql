@@ -36,3 +36,11 @@ INSERT INTO auteur (nom, prenom, mail, mdp) VALUES
 ('Daddy', 'Yankee', 'mail@mail.com', '123'),
 ('Mommy', 'Yankaa', 'mail2@mail.com', '456'),
 ('Lil', 'BB', 'mail3@mail.com', '789');
+
+
+-- afficher tous les renseignements de l'auteur
+-- ayant le mail : mail1@mail.com 
+-- et le mot de passe : 123
+
+select * from auteur where mail_aut="mail1@mail.com" 
+and mdp_aut="123";
