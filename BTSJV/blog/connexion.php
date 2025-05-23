@@ -14,7 +14,7 @@ $requete = "select * from auteur where id_aut=$id";
 $resultat = $mysqli->query($requete);
 
 foreach ($resultat as $auteur) {
-	echo "Connexion réussie pour : " . $auteur["nom_aut"] . " " . $auteur["prenom_aut"];
+	echo "Connexion réussie pour : " . $auteur["nom"] . " " . $auteur["prenom"];
 }
 
 if (($_SERVER['REQUEST_METHOD'] === "POST") && isset($_POST['deconnexion'])) {
@@ -41,7 +41,7 @@ if (($_SERVER['REQUEST_METHOD'] === "POST") && isset($_POST['deconnexion'])) {
 		<button name="deconnexion">Déconnexion</button>
 	</form>
 
-	//formulaire d'upload des articles avec image
+	<!-- formulaire d'upload des articles avec image -->
 
 	<form method="POST" enctype="multipart/form-data">
 		<input type="text" name="titre" placeholder="TITRE"><br><br>
