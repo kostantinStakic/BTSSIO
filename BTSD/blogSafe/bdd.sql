@@ -1,42 +1,54 @@
--- BLOG -- 
+-- BLOG --
 
 /*
 bdd :
-un auteur(pseudo,mdp) peut publier un ou plusieur articles 
-un article(titre,contenu,urlimage) ne peut être publié que par un auteur
-
-MLD : 
-
-auteur(idaut,pseudo,mdp)
-article(idart,titre,contenu,urlimage,#idaut)
-
-MPD : 
+un auteur (pseudo, mdp) peut publier un ou plusieurs articles
+un article (titre, contenu, url_image) ne peut être publié que par un auteur
 */
 
-drop database if exists blogD;
+-- MLD
+-- Auteur(_id_Aut, pseudo, mdp)
+-- Article(_id_Art, titre, contenu, url_image, #id_Aut)
 
-create database blogD;
+-- MPD
 
-use blogD;
+drop database if exists blogd;
+create database blogd;
+use blogd;
 
-create table auteur(
-	idaut int auto_increment primary key,
+create table Auteur(
+	id_Aut int auto_increment primary key,
 	pseudo varchar(50),
-	mdp varchar(20)
-	);
+	mail varchar(50),
+	mdp varchar(50)
+);
 
-create table article(
-	idart int auto_increment primary key,
+create table Article(
+	id_Art int auto_increment primary key,
 	titre varchar(50),
 	contenu text,
-	urlimage varchar(250),
-	idaut int,
-	foreign key(idaut) references auteur(idaut)
-	);
+	url_image varchar(250),
+	id_Aut int,
+	foreign key (id_Aut) references auteur(id_Aut)
+);
 
 insert into auteur values
-	(null,"DOKJA","123"),
-	(null,"Amandine","345"),
-	(null,"AmFicy","456");
+	(null,"Dokja","mail1@mail.com","123"),
+	(null,"Amandine","mail2@mail.com","345"),
+	(null,"AmFicy","mail3@mail.com","456"),
+	(null, "tls123", "ORW@mail.com","123");
 
-	
+
+select * from auteur where mail='' and mdp='' 
+
+
+select * from auteur where mail='0' or 1=1
+
+ou
+
+select * from auteur where mail='' or 1=1 
+
+-- afficher toutes les infos d'un article ainsi que le pseudo 
+-- de son auteur
+
+select * from auteur,article where auteur.idaut = article.idaut;
