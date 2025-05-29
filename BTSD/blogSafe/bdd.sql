@@ -52,3 +52,5 @@ select * from auteur where mail='' or 1=1
 -- de son auteur
 
 select * from auteur,article where auteur.idaut = article.idaut;
+
+
