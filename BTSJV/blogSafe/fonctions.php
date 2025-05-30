@@ -23,14 +23,14 @@ catch(mysqli_sql_exception $e)
 function verifConnexion($mysqli,$mail,$mdp)
 {
 	//on va créer notre requête que nous allons stocker dans une variable
-	$requete = "select * from auteur where mail=? and mdp=?";
+	$requete = "select * from auteur where mail=?";
 
 	//pour sécuriser nos requetes, on ne va pas utiliser query()
 	//on va preparer la requete
 	$stmt = $mysqli->prepare($requete);
 
 	//on va associer les types aux variables
-	$stmt->bind_param("ss",$mail,$mdp);
+	$stmt->bind_param("s",$mail);
 
 	//on va executer la requete
 	$stmt->execute();
@@ -38,7 +38,19 @@ function verifConnexion($mysqli,$mail,$mdp)
 	//on va recuperer le ou les resultats
 	$resultat = $stmt->get_result();
 
-	return $resultat;
+	//on recupere sous forme de tableau associatif le SEUL résultat
+	$auteur = $resultat->fetch_assoc();
+
+	//Verif le mot de passe saisi, on le compare au mot de passe
+	//issu de la bdd. 
+	if (password_verify($mdp, $auteur["mdp"])) {
+		header("Location: connexion.php?id=".$auteur["id_aut"]);
+		exit();
+	}else
+	{
+		echo "MDP pas OK";
+	}
+
 }
 
 function selectWhereIdUser($mysqli,$id)
@@ -67,6 +79,14 @@ function insertArticle($mysqli,$titre,$contenu,$urlimage,$id_aut)
 	$requete = "insert into article values(null,?,?,?,?)";
 	$stmt = $mysqli->prepare($requete);
 	$stmt->bind_param("sssi",$titre,$contenu,$urlimage,$id_aut);
+	$stmt->execute();	
+}
+
+function insertAuteur($mysqli,$nom,$prenom,$mail,$mdp)
+{
+	$requete = "insert into auteur values(null,?,?,?,?)";
+	$stmt = $mysqli->prepare($requete);
+	$stmt->bind_param("ssss",$nom,$prenom,$mail,$mdp);
 	$stmt->execute();	
 }
 

@@ -18,7 +18,7 @@ include("fonctions.php");
 		<input type="text" name="mdp" placeholder="mot de passe">
 		<input type="submit" name="valider" value="Connexion">
 	</form>
-
+	<a href="inscription.php">S'inscrire</a>
 	<?php
 		//on verfie que le bouton valider a été activé
 	if (isset($_GET['valider'])) {
@@ -26,14 +26,9 @@ include("fonctions.php");
 		$mail = $_GET['mail'];
 		$mdp = $_GET['mdp'];
 
-		$resultat = verifConnexion($mysqli,$mail,$mdp);
+		$auteur = verifConnexion($mysqli,$mail,$mdp);
 
-		//on va afficher le résultat
-		foreach ($resultat as $auteur) {
-			$id = $auteur["id_aut"];
-			$_SESSION['utilisateur'] = $auteur;
-			header("Location: connexion.php?id=".$id);
-		}
+		
 
 	}
 

@@ -60,3 +60,6 @@ insert into auteur values
 
 
 select * from auteur where mail_aut='' OR 1=1 -- and mdp_aut=;
+
+
+alter table auteur modify mdp_aut text;
