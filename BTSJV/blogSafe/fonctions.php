@@ -44,6 +44,7 @@ function verifConnexion($mysqli,$mail,$mdp)
 	//Verif le mot de passe saisi, on le compare au mot de passe
 	//issu de la bdd. 
 	if (password_verify($mdp, $auteur["mdp"])) {
+		$_SESSION['utilisateur'] = $auteur;
 		header("Location: connexion.php?id=".$auteur["id_aut"]);
 		exit();
 	}else

@@ -27,7 +27,7 @@ include("fonctions.php");
 		$mdp = $_GET['mdp'];
 
 		$auteur = verifConnexion($mysqli,$mail,$mdp);
-
+		
 		
 
 	}

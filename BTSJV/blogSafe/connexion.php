@@ -97,7 +97,7 @@ if (isset($_POST['modifier'])) {
 	$id_art = htmlspecialchars(trim($_GET['id_art']));
 	$titre = htmlspecialchars(trim($_POST['titre']));
 	$contenu = htmlspecialchars(trim($_POST['contenu']));
-	$id_aut = htmlspecialchars(trim($_GET['id_aut']));
+	$id_aut = htmlspecialchars(trim($_GET['id']));
 
 	$dossier = "images/";
 
@@ -107,9 +107,11 @@ if (isset($_POST['modifier'])) {
 
 	$image = $_FILES['image']['name'];
 	$destination = $dossier . $image;
+	
 	move_uploaded_file($_FILES['image']['tmp_name'], $destination);
 
-	updateArticle($mysqli,$titre,$contenu,$urlimage,$id_aut,$id_art);
+	updateArticle($mysqli,$titre,$contenu,$destination,$id_aut,$id_art);
+
 	header("Location: connexion.php?id=".$id);
 	exit();
 }
