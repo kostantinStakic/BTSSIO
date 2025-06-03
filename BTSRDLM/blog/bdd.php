@@ -6,4 +6,59 @@ $user = "root";
 $password = "";
 $dbname = "blogLM";
 
+
+// les fonctions : 
+
+function selectAuteurWhereMailMdp($bdd, $mail, $mdp)
+{
+	//requete sql qui va recup mail et mdp
+	//et on va afficher l'utilisateur associé
+	$requete = "select * from auteur where mail=? and mdp=?";
+
+	//preparer la requete prepare()
+	$stmt = $bdd->prepare($requete);
+	$stmt->bind_param("ss", $mail, $mdp);
+
+	//executer le requete execute()
+	$stmt->execute();
+
+	$resultat = $stmt->get_result();
+
+	/*
+	on va executer la requete méthode vulnérable (avec query) et on recuperer le resultat : 
+
+	$resultat = $bdd->query($requete);
+	*/
+
+	//une fonction retourne toujours un résultat
+	return $resultat;
+}
+
+function selectAuteurWhereId($bdd, $id)
+{
+
+	$requete = "select * from auteur where id_aut=?";
+
+	$stmt = $bdd->prepare($requete);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+
+	$resultat = $stmt->get_result();
+	return $resultat;
+}
+
+function selectAllArticle($bdd)
+{
+
+	$requete = "select * from article, auteur where article.id_aut = auteur.id_aut";
+
+	$stmt = $bdd->prepare($requete);
+	$stmt->execute();
+
+	$resultat = $stmt->get_result();
+	return $resultat;
+}
+
+
+
 ?>

@@ -12,11 +12,8 @@ if (isset($_GET['id']) && $_GET['id'] == $_SESSION['utilisateur']['id_aut']) {
 // données afin d'éviter de mauvaises interpretations
 $id = htmlspecialchars(trim($_GET['id']));
 
-//on affiche l'utilisateur dont l'id est passé en url
-$requete = "select * from auteur where id_aut='$id'";
-
 //on recup les resultat 
-$resultat = $bdd->query($requete);
+$resultat = selectAuteurWhereId($bdd, $id);
 
 //on affiche le resultat
 foreach ($resultat as $auteur) {
@@ -56,6 +53,36 @@ echo $xss;
 	<form method="post">
 		<input type="submit" name="deco" value="Se déconnecter">
 	</form>
+
+	<form method="post">
+		<input type="text" name="titre" placeholder="TITRE"><br><br>
+		<textarea name="contenu" placeholder="Article"></textarea><br><br>
+		<input type="file" name="image"><br>
+		<input type="submit" name="ajouter" value="AJOUTER">
+	</form>
+
+	<h3>Liste des articles</h3>
+
+	<table border="1">
+		<tr>
+			<th>titre</th>
+			<th>contenu</th>
+			<th>auteur</th>
+		</tr>
+	<?php
+	$lesArticles = selectAllArticle($bdd);
+	foreach ($lesArticles as $unArticle) {
+		echo "	<tr>
+					<td>".$unArticle['titre']."</td>
+					<td>".$unArticle['contenu']."</td>
+					<td>".$unArticle['nom']." ".$unArticle['prenom']."</td>
+				</tr>";
+	}
+	?>
+
+
+	</table>
+
 	<br>
 	<a href="accueil.php">Accueil</a>
 </body>

@@ -9,12 +9,7 @@ if (isset($_GET['login'])) {
 	$mail = $_GET['mail'];
 	$mdp = $_GET['mdp'];
 
-	//requete sql qui va recup mail et mdp
-	//et on va afficher l'utilisateur associé
-	$requete = "select * from auteur where mail='$mail' and mdp='$mdp'";
-
-	//on va executer la requete méthode vulnérable (avec query) et on recuperer le resultat
-	$resultat = $bdd->query($requete);
+	$resultat = selectAuteurWhereMailMdp($bdd, $mail, $mdp);
 
 	//on récupère les attributs retournés par la requete
 	foreach ($resultat as $auteur) {

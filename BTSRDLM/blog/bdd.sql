@@ -60,3 +60,16 @@ select * from auteur where mail='' OR 1=1 -- ' and mdp=''
 
 ' OR 1=1 -- 
 
+-- ouvrez consol mysql (wmp, xamp ou mamp)
+
+-- show databases, vérifiez le nom de la bdd BLOG 
+
+-- si c'est autre chose que BLOGLM, il faut changer 
+
+-- le nom dans bdd.php
+
+-- faites use lenomdelabdd 
+
+-- desc auteur;
+
+-- desc article;
