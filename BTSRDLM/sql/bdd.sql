@@ -96,4 +96,52 @@
 			values(null, 'Domenech', 'Raymond', '14 place du foot', 'dr@gmail.com','012345678','BTS'),
 			(null, 'Dubois', 'Julie', '4 rue de Stalingrad', 'dj@gmail.com','012345678','BACHELOR'),
 			(null, 'Zlatan', 'Dragan', '3 bld de la libération', 'zd@gmail.com','012345678','BTS');
+/*
+EXERCICES (Création de VIEWS) 
+Exercice 1 : VUE des chambres avec leur hôtel associé 
+Créer une vue Vue_Chambres_Hotels affichant pour chaque chambre : 
+l’idChambre 
+le NumChambre 
+le nom de l'hôtel (Libelle)
+*/
+
+CREATE VIEW Vue_Chambres_Hotels as
+SELECT c.idChambre, c.NumChambre, h.libelle
+FROM chambres c
+JOIN hotels h 
+ON c.hotel = h.idhotel;
+/*
+Exercice 2 : VUE des tarifs par type de chambre 
+Créer une vue Vue_Tarifs_TypeChambre affichant : 
+le nom de l’hôtel (Libelle) 
+le type de lit (TypeLit) 
+le nombre de lits (NombreLit) 
+le prix (Prix) */
+
+CREATE VIEW vue_tarif_typechambre AS
+SELECT 
+h.Libelle AS nom_hotel,
+tc.TypeLit,
+tc.NombreLit,
+t.Prix
+FROM 
+Tarifs t
+JOIN 
+Hotels h ON t.hotel = h.idHotel
+JOIN 
+TypesChambre tc ON t.typeChambre = tc.idTypeChambre;
+/*
+créer une vue avec le nom des hotels associés 
+au nombre d'étoiles sur une seule colonne
+CONCAT(nomHotel,' ',nbreEtoile,' Type de chambre : ',typeschambre) AS Description
+*/
+
+	CREATE VIEW Vue_description_complete AS
+	SELECT idhotel, 
+	CONCAT(h.libelle,' ',h.etoile,' Type de chambre : ',tc.TypeLit) AS Description
+	FROM hotels h
+	JOIN chambres c 
+	ON c.hotel =h.idhotel
+	JOIN TypesChambre tc 
+	ON tc.idtypeChambre = c.typeChambre;
 
