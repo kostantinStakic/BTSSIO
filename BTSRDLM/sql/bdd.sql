@@ -145,3 +145,10 @@ CONCAT(nomHotel,' ',nbreEtoile,' Type de chambre : ',typeschambre) AS Descriptio
 	JOIN TypesChambre tc 
 	ON tc.idtypeChambre = c.typeChambre;
 
+
+GRANT SELECT ON resahotel.* TO 'lolo'@'localhost';
+
+revoke all privileges on resahotel.* FROM 'lolo'@'localhost';
+
+GRANT SELECT(libelle,etoile) 
+	ON resahotel.hotels TO 'lolo'@'localhost';
