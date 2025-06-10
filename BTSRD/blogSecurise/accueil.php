@@ -8,13 +8,28 @@ if ($conn->connect_error) {
 }
 
 if (isset($_GET['valider'])) {
-    $mail = $_GET['mail'];
-    $mdp = $_GET['mdp'];
+    // sécurisation de la recupération des données
+    // saisies, grace à la fonction htmlspecialchars()
+    // le programme interprete les balises html comme du code et ne permet plus les injections de type xss (javascript)
+    $mail = htmlspecialchars(trim($_GET['mail']));
+    $mdp = htmlspecialchars(trim($_GET['mdp']));
     
     //le pire des trucs
-    $requete = "select * from auteur where mail='$mail' and mdp='$mdp'";
+    $requete = "select * from auteur where mail=? and mdp=?";
 
-    $resultat = $conn->query($requete);
+    //on va preparer notre quete
+    //class = moule constitué d'attributs de class
+    //objet = instanciation de class
+    //méthodes = fonctions au sein de la class
+    $stmt = $conn->prepare($requete);
+
+    //on va associer les données saisies aux types 
+    //correspondants des attributs de la bdd
+    $stmt->bind_param("ss",$mail,$mdp);
+
+    //on va executer la requete
+    $stmt->execute();
+    $resultat = $stmt->get_result();
 
     foreach ($resultat as $auteur) {
         $id = $auteur["id_aut"];
