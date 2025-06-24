@@ -107,4 +107,14 @@ function updateArticle($mysqli,$titre,$contenu,$urlimage,$id_aut,$id_art)
 	$stmt->execute();	
 }
 
+function selectAllArticles($mysqli)
+{
+	$requete = "select * from article";
+	$stmt = $mysqli->prepare($requete);
+	$stmt->execute();
+	$resultat = $stmt->get_result();
+
+	return $resultat;
+}	
+
 ?>

@@ -54,7 +54,7 @@ echo $xss;
 		<input type="submit" name="deco" value="Se déconnecter">
 	</form>
 
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
 		<input type="text" name="titre" placeholder="TITRE"><br><br>
 		<textarea name="contenu" placeholder="Article"></textarea><br><br>
 		<input type="file" name="image"><br>
@@ -70,18 +70,51 @@ echo $xss;
 			<th>auteur</th>
 		</tr>
 	<?php
+
+
+
 	$lesArticles = selectAllArticle($bdd);
 	foreach ($lesArticles as $unArticle) {
 		echo "	<tr>
 					<td>".$unArticle['titre']."</td>
 					<td>".$unArticle['contenu']."</td>
 					<td>".$unArticle['nom']." ".$unArticle['prenom']."</td>
+					<td><img src='images/modifier.png' width=20px></td>
+					<td><a href='connexion.php?action=supp&id_art=".$unArticle['id_art']."'><img src='images/supprimer.png' width=20px></td>
 				</tr>";
 	}
 	?>
 
 
 	</table>
+
+	<?php
+
+	if (isset($_POST["ajouter"])) {
+		$dossier = "images/";
+		if (!is_dir($dossier)) {
+			mkdir($dossier);
+		}
+		$image = $_FILES['image']['name'];
+		$url_image = $dossier.$image;
+		move_uploaded_file($_FILES['image']['tmp_name'], $url_image);
+
+		$titre = htmlspecialchars(trim($_POST['titre']));
+		$contenu = htmlspecialchars(trim($_POST['contenu']));
+		insertArticle($bdd,$titre,$contenu,$url_image,$id);
+		header("Location: connexion.php?id=" . $id);
+		exit();
+
+	}
+
+	if (isset($_GET['action']) && $_GET['action'] == "supp") {
+		$id_art = htmlspecialchars($_GET['id_art']);
+		deleteArticleWhereId($bdd, $id_art);
+		header("Location: connexion.php?id=" . $_SESSION['utilisateur']['id_aut']);
+		exit();
+	}
+
+	?>
 
 	<br>
 	<a href="accueil.php">Accueil</a>

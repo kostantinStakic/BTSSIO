@@ -59,6 +59,37 @@ function selectAllArticle($bdd)
 	return $resultat;
 }
 
+function insertArticle($bdd,$titre,$contenu,$url_image,$id_aut)
+{
+	if ($bdd == null) {
+		return null;
+	}
+	$requete = "insert into article values(null,?,?,?,?)";
+
+	$stmt = $bdd->prepare($requete);
+	$stmt->bind_param("sssi",$titre,$contenu,$url_image,$id_aut);
+	$stmt->execute();
+}
+
+function selectAllArticles($mysqli)
+{
+	$requete = " select * from auteur aut join article art on aut.id_aut = art.id_aut;
+";
+	$stmt = $mysqli->prepare($requete);
+	$stmt->execute();
+	$resultat = $stmt->get_result();
+
+	return $resultat;
+}	
+
+function deleteArticleWhereId($mysqli, $id_art)
+{
+	$requete = "delete from article where id_art=?";
+	$stmt = $mysqli->prepare($requete);
+	$stmt->bind_param("i",$id_art);
+	$stmt->execute();
+
+}
 
 
 ?>

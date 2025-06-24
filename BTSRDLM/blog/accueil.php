@@ -39,16 +39,26 @@ if (isset($_GET['login'])) {
 	<h2>Les rappeurs bling bling, mais pas trop ...	</h2>
 
 	<table>
-		<tr>
-			<td><img src="images/riff.jpeg" width="400"></td>
-			<td style="vertical-align: top;">
-				<span style="font-weight: 900;">
-				Titre
-				</span>
-				<p>Publication, bla bla bla ....
-				</p>
-			</td>
-		</tr>
+		<?php
+		$lesArticles = selectAllArticles($bdd);
+
+	foreach ($lesArticles as $unArticle) {
+		echo "	<tr>
+					<td><img src='".$unArticle['url_image']."' width='400'></td>
+					<td style='vertical-align: top;'>
+						<span style='font-weight: 900;'>
+						".$unArticle['titre']."
+						</span>
+						<p>".$unArticle['contenu']."</p>
+						<p><i>".$unArticle['nom']." ".$unArticle['prenom']."</i></p>
+					</td>
+				</tr>";
+			
+			}
+
+
+		?>
+
 	</table>
 
 </body>

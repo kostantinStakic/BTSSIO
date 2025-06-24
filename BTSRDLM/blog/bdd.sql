@@ -73,3 +73,7 @@ select * from auteur where mail='' OR 1=1 -- ' and mdp=''
 -- desc auteur;
 
 -- desc article;
+
+
+-- afficher les infos des articles ainsi que de leurs auteurs
+ select * from auteur aut join article art on aut.id_aut = art.id_aut;
