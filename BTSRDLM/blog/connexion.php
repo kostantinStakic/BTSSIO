@@ -55,7 +55,7 @@ echo $xss;
 	</form>
 
 	<form method="post" enctype="multipart/form-data">
-		<input type="text" name="titre" placeholder="TITRE"><br><br>
+		<input type="text" name="titre" placeholder="TITRE" value="Un titre"><br><br>
 		<textarea name="contenu" placeholder="Article"></textarea><br><br>
 		<input type="file" name="image"><br>
 		<input type="submit" name="ajouter" value="AJOUTER">
@@ -79,7 +79,7 @@ echo $xss;
 					<td>".$unArticle['titre']."</td>
 					<td>".$unArticle['contenu']."</td>
 					<td>".$unArticle['nom']." ".$unArticle['prenom']."</td>
-					<td><img src='images/modifier.png' width=20px></td>
+					<td><a href='connexion.php?action=modif&id_art=".$unArticle['id_art']."'><img src='images/modifier.png' width=20px></td>
 					<td><a href='connexion.php?action=supp&id_art=".$unArticle['id_art']."'><img src='images/supprimer.png' width=20px></td>
 				</tr>";
 	}
