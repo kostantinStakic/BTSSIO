@@ -83,9 +83,9 @@ values('Dubois','Sophie','13 rue de verdun','dubois@gmail',0143216153);
 
 -- 2 : la méthode courte 
 
-insert into etudiant values(null,'Chan','Li','1 rue de Pékin','chan@gmail.com',0143216153);
 insert into etudiant values(null,'Ilic','Vladislav','3 Boulevard du vieux Slave','ilic@gmail.com',0143216153);
 insert into etudiant values(null,'Chaouche','Yazid','14 place de Marakech','ch@gmail.com',0143216153);
+insert into etudiant values(null,'Chan','Li','1 rue de Pékin','chan@gmail.com',0143216153);
 insert into etudiant values(null,'Diouf','Pape','5 avenue du Congo','di@gmail.com',0143216153);
 
 insert into entreprise values
